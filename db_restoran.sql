@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 16 Jun 2020 pada 07.20
--- Versi server: 10.1.38-MariaDB
--- Versi PHP: 7.3.2
+-- Waktu pembuatan: 01 Nov 2021 pada 14.43
+-- Versi server: 10.4.21-MariaDB
+-- Versi PHP: 8.0.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -64,11 +63,11 @@ CREATE TABLE `tb_masakan` (
 --
 
 INSERT INTO `tb_masakan` (`id_masakan`, `nama_masakan`, `harga`, `stok`, `status_masakan`, `gambar_masakan`) VALUES
-(8, 'Sate Ayam', '11000', 15, 'tersedia', 'Sate Ayam.jpeg'),
-(14, 'Sayur Asem', '7500', 78, 'tersedia', 'Sayur Asem.jpeg'),
+(8, 'Sate Ayam', '11000', 14, 'tersedia', 'Sate Ayam.jpeg'),
+(14, 'Sayur Asem', '7500', 77, 'tersedia', 'Sayur Asem.jpeg'),
 (18, 'Ayam Geprek', '11000', 0, 'tersedia', 'Ayam Geprek.jpeg'),
-(19, 'Nasi Pecel', '7000', 21, 'tersedia', 'Nasi Pecel.jpg'),
-(20, 'Cincau', '2500', 99, 'tersedia', 'Cincau.jpg');
+(19, 'Nasi Pecel', '7000', 16, 'tersedia', 'Nasi Pecel.jpg'),
+(20, 'Cincau', '2500', 94, 'tersedia', 'Cincau.jpg');
 
 -- --------------------------------------------------------
 
@@ -102,7 +101,8 @@ INSERT INTO `tb_order` (`id_order`, `id_admin`, `id_pengunjung`, `waktu_pesan`, 
 (21, 1, 10, '2019-08-07 08:54:23', 1, '22000', '50000', '28000', 'sudah bayar'),
 (22, 1, 15, '2020-06-03 21:15:44', 5, '25000', '30000', '5000', 'sudah bayar'),
 (23, 1, 15, '2020-06-03 21:17:29', 1, '66000', '70000', '4000', 'sudah bayar'),
-(24, 1, 15, '2020-06-03 21:22:56', 2, '13500', '15000', '1500', 'sudah bayar');
+(24, 1, 15, '2020-06-03 21:22:56', 2, '13500', '15000', '1500', 'sudah bayar'),
+(25, 0, 26, '2021-10-31 04:09:50', 1, '66000', '', '', 'belum bayar');
 
 -- --------------------------------------------------------
 
@@ -145,7 +145,11 @@ INSERT INTO `tb_pesan` (`id_pesan`, `id_user`, `id_order`, `id_masakan`, `jumlah
 (57, 15, 22, 18, 1, 'sudah'),
 (58, 15, 23, 18, 6, 'sudah'),
 (59, 15, 24, 20, 1, 'sudah'),
-(60, 15, 24, 18, 1, 'sudah');
+(60, 15, 24, 18, 1, 'sudah'),
+(61, 26, 25, 19, 5, ''),
+(62, 26, 25, 20, 5, ''),
+(63, 26, 25, 14, 1, ''),
+(64, 26, 25, 8, 1, '');
 
 -- --------------------------------------------------------
 
@@ -179,7 +183,11 @@ INSERT INTO `tb_stok` (`id_stok`, `id_pesan`, `jumlah_terjual`, `status_cetak`) 
 (12, 57, 1, 'belum cetak'),
 (13, 58, 6, 'belum cetak'),
 (14, 59, 1, 'belum cetak'),
-(15, 60, 1, 'belum cetak');
+(15, 60, 1, 'belum cetak'),
+(16, 61, 5, 'belum cetak'),
+(17, 62, 5, 'belum cetak'),
+(18, 63, 1, 'belum cetak'),
+(19, 64, 1, 'belum cetak');
 
 -- --------------------------------------------------------
 
@@ -201,7 +209,14 @@ CREATE TABLE `tb_user` (
 --
 
 INSERT INTO `tb_user` (`id_user`, `username`, `password`, `nama_user`, `id_level`, `status`) VALUES
-(1, 'admin', '123', 'admin', 1, 'aktif')
+(1, 'admin', '123', 'Admin\r\n', 1, 'aktif'),
+(20, 'kasir', 'kasir', 'kasir', 3, 'aktif'),
+(21, 'weiter', '123', 'Waiter', 2, 'aktif'),
+(22, 'owner1', '123', 'Owner 1', 4, 'aktif'),
+(23, 'owner2', '123', 'Owner 2', 4, 'aktif'),
+(24, 'owner3', '123', 'Owner 3', 4, 'aktif'),
+(25, 'owner4', '123', 'Owner 4', 4, 'aktif'),
+(26, 'user', '123', 'user', 5, 'aktif');
 
 --
 -- Indexes for dumped tables
@@ -267,25 +282,25 @@ ALTER TABLE `tb_masakan`
 -- AUTO_INCREMENT untuk tabel `tb_order`
 --
 ALTER TABLE `tb_order`
-  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_pesan`
 --
 ALTER TABLE `tb_pesan`
-  MODIFY `id_pesan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id_pesan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_stok`
 --
 ALTER TABLE `tb_stok`
-  MODIFY `id_stok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_stok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
